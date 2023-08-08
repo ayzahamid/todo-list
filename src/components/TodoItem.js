@@ -1,5 +1,5 @@
 import React from "react";
-import Tag from "./Tag";
+import TagList from "./TagList";
 
 const TodoItem = (props) => {
   const completedStyle = {
@@ -21,7 +21,7 @@ const TodoItem = (props) => {
       <button onClick={() => props.deleteTodoProps(id)}>Delete</button>
       <span style={completed ? completedStyle : null}>{title}</span>
       <p>{assignee && `Assigned To: ${assignee}` }</p>
-      <p><Tag tags={tags}></Tag></p>
+      <p><TagList tags={tags}></TagList></p>
     </li>
   );
 }

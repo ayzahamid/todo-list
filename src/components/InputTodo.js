@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Tag from "./Tag";
+import TagList from "./TagList";
 
 const InputTodo = (props) => {
   const defaultState = {
@@ -11,6 +11,7 @@ const InputTodo = (props) => {
   const [todo, setTodo] = useState(defaultState)
   const [tag, setTag] = useState([])
   const [tagColors, setTagColors] = useState({})
+  const [repeatedTagError, setRepeatedTagError] = useState("")
 
   const onChange = e => {
     setTodo({
@@ -28,6 +29,18 @@ const InputTodo = (props) => {
     return `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
   }
 
+  const validateTagRepitition = (tagName) => {
+    let repeat_flag = false;
+
+    todo.tags.forEach((element) => {
+      if (element.name === tagName) {
+        return repeat_flag = true;
+      }
+    });
+
+    return repeat_flag;
+  }
+
   const onPressEnter = e => {
     if (e.key === "Enter" && e.target.value) {
       const tagName = e.target.value.toLowerCase().replace(/[^a-z]/g, "").trim();
@@ -41,16 +54,24 @@ const InputTodo = (props) => {
         });
       }
 
-      const newTag = {
-        name: e.target.value,
-        color: tagColor
-      }
+      if (!validateTagRepitition(tagName)) {
+        const newTag = {
+          name: e.target.value,
+          color: tagColor
+        }
 
-      setTodo({
-        ...todo,
-        tags: [...todo.tags, newTag]
-      })
-      setTag([]);
+        setTodo({
+          ...todo,
+          tags: [...todo.tags, newTag]
+        })
+        setTag([]);
+      } else {
+        setRepeatedTagError("This tag " + tagName + "is already been used for this Todo Item.")
+
+        setTimeout(function () {
+          setRepeatedTagError("");
+        }, 2000)
+      }
     }
   }
 
@@ -92,7 +113,8 @@ const InputTodo = (props) => {
       onChange={onTagChange}
       onKeyDown={onPressEnter}
       />
-      <Tag tags={todo.tags}></Tag>
+      <div>{repeatedTagError}</div>
+      <TagList tags={todo.tags} todo={todo} setTodo={setTodo}></TagList>
     </>
   );
 }
