@@ -7,7 +7,7 @@
 You can download or clone this project by running this command from your terminal:
 
 ```
-git clone https://github.com/Ibaslogic/simple-todo-app
+https://github.com/ayzahamid/todo-list.git
 ```
 
 This will create a directory in the name of the project folder.
