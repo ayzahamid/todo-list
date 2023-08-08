@@ -1,4 +1,29 @@
 import React from "react";
+import styled from "styled-components";
+
+const FlexDisplay = styled.div`
+  display: flex;
+  width: "100%";
+`
+
+const TodoTagBlock = styled.span`
+  display: flex;
+  width: fit-content;
+  padding: 2px 20px;
+  border-radius: 18px;
+  text-align: center;
+  text-shadow: 1px black;
+  margin: 0 5px;
+`
+
+const TodoTagText = styled.span`
+  font-size: 16px;
+`
+
+const RemoveTagIcon = styled.span`
+  padding-left: 0.5rem;
+  font-weight: bold;
+`
 
 const TagList = (props) => {
   const removeTag = (index) => {
@@ -9,15 +34,15 @@ const TagList = (props) => {
   }
 
   return (
-    <div className="display-flex">
+    <FlexDisplay>
       {
         props.tags &&
-        props.tags.map((tag, index) => <span key={index} className="tag" style={{backgroundColor:tag.color}}>
-          <span>{tag.name}</span>
-          <span onClick={()=>removeTag(index)}>x</span>
-          </span>)
+        props.tags.map((tag, index) => <TodoTagBlock key={index} style={{backgroundColor:tag.color}}>
+          <TodoTagText>{tag.name}</TodoTagText>
+          <RemoveTagIcon onClick={()=>removeTag(index)}>x</RemoveTagIcon>
+        </TodoTagBlock>)
       }
-    </div>
+    </FlexDisplay>
   );
 }
 

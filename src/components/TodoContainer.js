@@ -3,6 +3,25 @@ import TodosList from "./TodosList";
 import Header from "./Header";
 import InputTodo from "./InputTodo";
 import { v4 as uuidv4 } from "uuid";
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 4rem;
+  margin-left: 3rem;
+`
+
+const TodoListContainer = styled.div`
+  margin-top: 2rem;
+`
+const CompletedTaskContainer = styled.div`
+  margin-top: 2rem;
+  margin-top: 2rem;
+  border: 1px solid #9fec9f;
+  padding: 1.5rem 0.5rem;
+  border-radius: 2rem;
+`
 
 const TodoContainer = (props) => {
   const defaultState =[
@@ -59,28 +78,27 @@ const TodoContainer = (props) => {
   };
 
   return (
-    <div className="container">
+    <Container>
       <Header />
       <InputTodo addTodoProps={addTodoItem} />
-      <div className="row">
-        <div className="col-md-6">
-          <TodosList
-            todos={todos.filter(todo => !todo.completed)}
-            handleChangeProps={handleChange}
-            deleteTodoProps={delTodo}
-          />
-        </div>
+      <TodoListContainer>
+        <h2>To Be Done</h2>
+        <TodosList
+          todos={todos.filter(todo => !todo.completed)}
+          handleChangeProps={handleChange}
+          deleteTodoProps={delTodo}
+        />
+      </TodoListContainer>
 
-        <div className="col-md-6">
-          <h2>Completed Tasks</h2>
-          <TodosList
-            todos={todos.filter(todo => todo.completed)}
-            handleChangeProps={handleChange}
-            deleteTodoProps={delTodo}
-          />
-        </div>
-      </div>
-    </div>
+      <CompletedTaskContainer>
+        <h2>Completed Tasks</h2>
+        <TodosList
+          todos={todos.filter(todo => todo.completed)}
+          handleChangeProps={handleChange}
+          deleteTodoProps={delTodo}
+        />
+      </CompletedTaskContainer>
+    </Container>
   );
 }
 export default TodoContainer;

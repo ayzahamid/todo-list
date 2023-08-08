@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 //component file
-import TodoContainer from "./components/TodoContainer";
+import Home from "./components/Home";
 import "./App.css";
 
-ReactDOM.render(<TodoContainer />, document.getElementById("root"));
+ReactDOM.render(<Home />, document.getElementById("root"));

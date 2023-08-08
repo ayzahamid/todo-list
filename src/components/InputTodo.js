@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TagList from "./TagList";
+import { FormContainer, TagInputContainer, ButtonContainer, SubmitButton, TagFormInputText, TagErrorMessage } from "./CustomStyledComponents";
 
 const InputTodo = (props) => {
   const defaultState = {
@@ -43,7 +44,7 @@ const InputTodo = (props) => {
 
   const onPressEnter = e => {
     if (e.key === "Enter" && e.target.value) {
-      const tagName = e.target.value.toLowerCase().replace(/[^a-z]/g, "").trim();
+      const tagName = e.target.value.toLowerCase().trim();
       let tagColor = tagColors[tagName];
 
       if(!tagColor){
@@ -66,7 +67,7 @@ const InputTodo = (props) => {
         })
         setTag([]);
       } else {
-        setRepeatedTagError("This tag " + tagName + "is already been used for this Todo Item.")
+        setRepeatedTagError("This tag " + tagName + " is already been used for this Todo Item.")
 
         setTimeout(function () {
           setRepeatedTagError("");
@@ -84,37 +85,41 @@ const InputTodo = (props) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="form-container">
-        <input
-          type="text"
-          className="input-text"
-          placeholder="Add todo..."
-          value={todo.title}
-          name="title"
-          onChange={onChange}
-        />
-        <input
-          type="text"
-          className="input-text"
-          placeholder="Add assignee..."
-          value={todo.assignee}
-          name="assignee"
-          onChange={onChange}
-        />
-        <input type="submit" className="input-submit" value="Submit" />
-      </form>
+      <FormContainer onSubmit={handleSubmit}>
+        <TagInputContainer>
+          <TagFormInputText
+            type="text"
+            placeholder="Add todo..."
+            value={todo.title}
+            name="title"
+            onChange={onChange}
+          />
+          <TagFormInputText
+            type="text"
+            placeholder="Add assignee..."
+            value={todo.assignee}
+            name="assignee"
+            onChange={onChange}
+          />
+        </TagInputContainer>
+      </FormContainer>
 
-      <input
-      type="text"
-      className="input-text"
-      placeholder="Add tags..."
-      value={tag}
-      name="tags"
-      onChange={onTagChange}
-      onKeyDown={onPressEnter}
-      />
-      <div>{repeatedTagError}</div>
+      <TagInputContainer>
+        <TagFormInputText
+        type="text"
+        placeholder="Add tags..."
+        value={tag}
+        name="tags"
+        onChange={onTagChange}
+        onKeyDown={onPressEnter}
+        />
+      </TagInputContainer>
+      <TagErrorMessage>{repeatedTagError}</TagErrorMessage>
       <TagList tags={todo.tags} todo={todo} setTodo={setTodo}></TagList>
+
+      <ButtonContainer>
+        <SubmitButton type="submit" value="Submit" />
+      </ButtonContainer>
     </>
   );
 }
