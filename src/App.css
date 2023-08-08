@@ -58,3 +58,18 @@ body {
   float: right;
   outline: none;
 }
+
+.tag {
+  display: flex;
+  width: fit-content;
+  padding: 2px 20px;
+  border-radius: 18px;
+  text-align: center;
+  text-shadow: 1px black;
+  margin: 0 5px;
+}
+
+.display-flex {
+  display: flex;
+  width: "100%";
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import Tag from "./Tag";
 
 const TodoItem = (props) => {
   const completedStyle = {
@@ -8,7 +9,7 @@ const TodoItem = (props) => {
     textDecoration: "line-through"
   };
 
-  const { completed, id, title } = props.todo;
+  const { completed, id, title, assignee, tags } = props.todo;
 
   return (
     <li className="todo-item">
@@ -19,6 +20,8 @@ const TodoItem = (props) => {
       />
       <button onClick={() => props.deleteTodoProps(id)}>Delete</button>
       <span style={completed ? completedStyle : null}>{title}</span>
+      <p>{assignee && `Assigned To: ${assignee}` }</p>
+      <p><Tag tags={tags}></Tag></p>
     </li>
   );
 }

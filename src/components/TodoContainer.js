@@ -52,6 +52,8 @@ const TodoContainer = (props) => {
       id: uuidv4(),
       title: todo.title,
       completed: false,
+      assignee: todo.assignee,
+      tags: todo.tags
     };
     setTodos([...todos, newTodo]);
   };
