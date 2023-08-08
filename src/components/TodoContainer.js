@@ -60,11 +60,24 @@ const TodoContainer = (props) => {
     <div className="container">
       <Header />
       <InputTodo addTodoProps={addTodoItem} />
-      <TodosList
-        todos={todos}
-        handleChangeProps={handleChange}
-        deleteTodoProps={delTodo}
-      />
+      <div className="row">
+        <div className="col-md-6">
+          <TodosList
+            todos={todos.filter(todo => !todo.completed)}
+            handleChangeProps={handleChange}
+            deleteTodoProps={delTodo}
+          />
+        </div>
+
+        <div className="col-md-6">
+          <h2>Completed Tasks</h2>
+          <TodosList
+            todos={todos.filter(todo => todo.completed)}
+            handleChangeProps={handleChange}
+            deleteTodoProps={delTodo}
+          />
+        </div>
+      </div>
     </div>
   );
 }
